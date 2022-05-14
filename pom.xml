@@ -25,4 +25,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     </dependency>  
   </dependencies>  
   
-</project>  
+</project>
+
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-war-plugin</artifactId>
+  <configuration>
+    <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+  </configuration>
+</plugin>
