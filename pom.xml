@@ -7,19 +7,20 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
 <modelVersion>4.0.0</modelVersion>  
   
-  <groupId>com.javatpoint.application1</groupId>  
-  <artifactId>my-application1</artifactId>  
-  <version>1.0</version>  
+  <groupId>javahome</groupId>  
+  <artifactId>myweb-repo</artifactId>  
+  <version>8.2.0</version>  
   <packaging>war</packaging>  
   
-  <name>Maven Quick Start Archetype</name>  
+  <name>java Home myweb-repo</name>  
   <url>http://maven.apache.org</url>  
   
   <dependencies>  
     <dependency>  
       <groupId>junit</groupId>  
+
       <artifactId>junit</artifactId>  
-      <version>8.2.0</version>  
+      <version>4.8.2</version>  
       <scope>test</scope>  
     </dependency>  
   </dependencies>  
