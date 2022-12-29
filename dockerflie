@@ -1,17 +1,7 @@
-# create a directory to work in
-mkdir example
-cd example
-
-# create an example file
-touch somefile.txt
-
-docker build -t myimage:latest -<<EOF
-FROM busybox
-COPY somefile.txt ./
-RUN cat /somefile.txt
-EOF
-
-# observe that the build fails
-...
-Step 2/3 : COPY somefile.txt ./
-COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
+# syntax=docker/dockerfile:1
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
