@@ -32,7 +32,6 @@
 			   
 			   ssh ec2-user@44.193.219.207/root/apache-tomcat-9.0.62/bin/shutdown.sh
 			   
-			   ssh ec2-user@44.193.219.207/root/apache-tomcat-9.0.62/bin/startup.sh
 			   
 			   """
 			   
