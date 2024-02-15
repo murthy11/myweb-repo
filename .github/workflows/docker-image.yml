@@ -16,4 +16,40 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
+
+  newrelic:
+    needs: build_and_deploy
+    if: ${{ needs.build_and_deploy.result == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Release Version and new relic guid variables
+        run: |
+          echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+
+          case $GITHUB_REF in
+            "master" | "dev")
+                echo "NEW_RELIC_ENTITY_GUID=${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_DEV }}" >> $GITHUB_ENV
+                ;;
+            "uat")
+                echo "NEW_RELIC_ENTITY_GUID=${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_UAT }}" >> $GITHUB_ENV
+                ;;
+            "prod")
+                echo "NEW_RELIC_ENTITY_GUID=${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_PROD }}" >> $GITHUB_ENV               
+                ;;
+            *)
+                echo "NEW_RELIC_ENTITY_GUID=${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID_DEV }}" >> $GITHUB_ENV
+                ;;
+          esac
+            
+      - name: New Relic Application Deployment Marker
+        uses: newrelic/deployment-marker-action@v2.2.0
+        with:
+          apiKey: ${{ secrets.NEWRELIC_API_KEY }}
+          guid: ${{ env.NEW_RELIC_ENTITY_GUID }}
+          version: "${{ env.RELEASE_VERSION }}"
+          user: "${{ github.actor }}"
+          commit: "${{ github.sha }}" 
+
+         
         
